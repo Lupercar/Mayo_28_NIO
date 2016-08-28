@@ -1,6 +1,7 @@
 package consola;
 
 import java.io.IOException;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,12 +43,15 @@ public class App {
 		
 //		Recorrer directorios
 //		====================
+		Files.walk(carpetaTemp, FileVisitOption.FOLLOW_LINKS)
+			.forEach( e -> System.out.println(e) ); 
 	}
 	
 	private static void mostrarContenido(Path ruta) throws IOException {
 		System.out.println("Mostrando el contenido de..." + ruta.getFileName()); 
 		Files.list(ruta)
-			.forEach(e -> {
+			.forEach(
+				e -> {
 				if(Files.isDirectory(e))
 					try {
 						mostrarContenido(ruta.resolve(e));
