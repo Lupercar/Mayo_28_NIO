@@ -33,5 +33,19 @@ public class App {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
+		
+//		Métodos recursivos 
+		System.out.println(factorial(15));
+		
+//		Recorrer directorios
+//		====================
+	}
+	
+	public static long factorial(long numero){
+//		4! = 4*3*2*1
+		if(numero == 1)
+			return 1; 
+		else 
+			return factorial(numero-1) * numero; 
 	}
 }//fin class consola.App
