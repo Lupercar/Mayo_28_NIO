@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 //		La librería NIO (New Input Output) se añadió en Java7.
 //		Utiliza un patrón Builder.
 //		La clase principal es Path, para hacer operaciones 
@@ -37,10 +38,27 @@ public class App {
 //		Métodos recursivos 
 		System.out.println(factorial(15));
 		
+		mostrarContenido(carpetaTemp); 
+		
 //		Recorrer directorios
 //		====================
 	}
 	
+	private static void mostrarContenido(Path ruta) throws IOException {
+		System.out.println("Mostrando el contenido de..." + ruta.getFileName()); 
+		Files.list(ruta)
+			.forEach(e -> {
+				if(Files.isDirectory(e))
+					try {
+						mostrarContenido(ruta.resolve(e));
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				else 
+					System.out.println(e.getFileName()); 
+			});
+	}
+
 	public static long factorial(long numero){
 //		4! = 4*3*2*1
 		if(numero == 1)
