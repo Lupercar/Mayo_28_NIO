@@ -1,5 +1,7 @@
 package consola;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -22,5 +24,14 @@ public class App {
 //		Devuelve un nuevo Path con la concatenación de las dos rutas
 		System.out.println( carpetaTemp.resolve(fichero2) ); 
 		
+//		Operaciones con Path
+//		====================
+		Path fichero2Absoluta = carpetaTemp.resolve(fichero2); 
+		if(!Files.exists(fichero2Absoluta))
+			try {
+				Files.createFile( fichero2Absoluta );
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 	}
 }//fin class consola.App
